@@ -1,8 +1,19 @@
-# Class: postgrey
+#
+# = Class: postgrey
 #
 class postgrey (
-  $options = [ '--unix=/var/spool/postfix/postgrey/socket', '--delay=60' ],
+  $options   = [ '--unix=/var/spool/postfix/postgrey/socket', '--delay=60' ],
+  $whitelist = [],
 ) {
+
+  File {
+    ensure  => file,
+    owner   => root,
+    group   => root,
+    mode    => '0644',
+    notify  => Service['postgrey'],
+  }
+
   package { 'postgrey':
     ensure  => present,
   }
@@ -14,11 +25,11 @@ class postgrey (
   }
 
   file { '/etc/sysconfig/postgrey':
-    ensure  => file,
-    owner   => root,
-    group   => root,
-    mode    => '0644',
     content => template('postgrey/postgrey.erb'),
-    notify  => Service['postgrey'],
   }
+
+  file { '/etc/postfix/postgrey_whitelist_clients.local':
+    content => template('postgrey/whitelist.erb'),
+  }
+
 }
