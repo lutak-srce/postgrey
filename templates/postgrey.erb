@@ -3,4 +3,4 @@
 #       --delay=N           greylist for N seconds (default: 300)
 #       --max-age=N         delete entries older than N days since the last time
 #       --auto-whitelist-clients=N   whitelist host after first successful delivery
-options="<%= Array(@options).join(' ') %>"
+POSTGREY_OPTS="<%= Array(@options).join(' ') %>"

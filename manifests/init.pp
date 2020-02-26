@@ -2,7 +2,7 @@
 # = Class: postgrey
 #
 class postgrey (
-  $options   = [ '--unix=/var/spool/postfix/postgrey/socket', '--delay=60' ],
+  $options   = [],
   $whitelist = [],
 ) {
 
