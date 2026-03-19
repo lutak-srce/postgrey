@@ -25,7 +25,7 @@ class postgrey (
   }
 
   file { '/etc/sysconfig/postgrey':
-    content => template('postgrey/postgrey.erb'),
+    content => template("postgrey/sysconfig.el${facts['os']['release']['major']}.postgrey.erb"),
   }
 
   file { '/etc/postfix/postgrey_whitelist_clients.local':
